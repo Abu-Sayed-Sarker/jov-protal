@@ -40,7 +40,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <NavLink to={'/register'}><button>Register</button></NavLink>
+                    <div className="flex gap-3">
+                        <NavLink to={'/register'}><button className="btn bg-sky-300 hover:bg-sky-500">Register</button></NavLink>
+                        <NavLink to={'/login'}><button className="btn bg-sky-300 hover:bg-sky-500">Log In</button></NavLink>
+                    </div>
                 </div>
             </div>
         </div>
