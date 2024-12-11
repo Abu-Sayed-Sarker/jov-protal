@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
 import auth from "../Firebase/Firebase.config";
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 // eslint-disable-next-line react/prop-types
 const Provider = ({ children }) => {
@@ -21,11 +21,22 @@ const Provider = ({ children }) => {
     }
 
 
+
+    //Log in
+
+    const singIn = (email, password) => {
+        setloder(true);
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+
+
     //ovgerver
 
     useEffect(() => {
         const unSubscriber = onAuthStateChanged(auth, crrentUser => {
             setuser(crrentUser);
+            console.log(crrentUser);
+
 
             setloder(false)
         })
@@ -41,7 +52,8 @@ const Provider = ({ children }) => {
         setuser,
         loder,
         setloder,
-        singUp
+        singUp,
+        singIn
     }
     return (
         <AuthContext.Provider value={authInfo}>

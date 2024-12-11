@@ -1,7 +1,32 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import AuthContext from "../Context/AuthContext";
+import { signOut } from "firebase/auth";
+import auth from "../Firebase/Firebase.config";
 
 
 const Navbar = () => {
+    const { user } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+
+    const Logoutbtn = () => {
+        signOut(auth)
+            .then(() => {
+                alert("log out success");
+                navigate("/")
+            })
+            .catch(error => {
+                console.log(error.message);
+
+
+            })
+    }
+
+
+
+
+
 
     const Links = <>
         <li><a>Item 1</a></li>
@@ -40,10 +65,13 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <div className="flex gap-3">
-                        <NavLink to={'/register'}><button className="btn bg-sky-300 hover:bg-sky-500">Register</button></NavLink>
-                        <NavLink to={'/login'}><button className="btn bg-sky-300 hover:bg-sky-500">Log In</button></NavLink>
-                    </div>
+                    {
+                        user?.email ? <button onClick={Logoutbtn} className="btn bg-sky-300 hover:bg-sky-500">Log out</button> : <div className="flex gap-3">
+                            <NavLink to={'/register'}><button className="btn bg-sky-300 hover:bg-sky-500">Register</button></NavLink>
+                            <NavLink to={'/login'}><button className="btn bg-sky-300 hover:bg-sky-500">Log In</button></NavLink>
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>

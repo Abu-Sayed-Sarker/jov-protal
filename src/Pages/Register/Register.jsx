@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import Navbar from "../../Common/Navbar";
 import AuthContext from "../../Context/AuthContext";
-
+import Lottie from "lottie-react";
+import lottoanimation from "../../assets/register.json"
 
 const Register = () => {
 
-    const { setuser, singUp } = useContext(AuthContext)
+    const { singUp } = useContext(AuthContext)
 
     const handelsubmition = e => {
         e.preventDefault();
@@ -21,7 +22,7 @@ const Register = () => {
 
         singUp(email, password)
             .then(result => {
-                setuser(result.user);
+                console.log(result.user);
 
             })
             .catch(error => {
@@ -38,10 +39,11 @@ const Register = () => {
                     <div className="hero-content flex-col lg:flex-row-reverse">
                         <div className="text-center lg:text-left">
                             <h1 className="text-5xl font-bold">Register now!</h1>
-                            <p className="py-6">
-                                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                                quasi. In deleniti eaque aut repudiandae et a id nisi.
-                            </p>
+                            <div className="max-w-2xl">
+                                <Lottie animationData={lottoanimation}>
+
+                                </Lottie>
+                            </div>
                         </div>
                         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                             <form onSubmit={handelsubmition} className="card-body">
